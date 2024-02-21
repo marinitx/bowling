@@ -75,8 +75,10 @@ while (round < NUM_ROUNDS - 1)
         score += 10;
         if (pinsknocked[round + 1][0] == 10) // Si hay otro pleno en la siguiente ronda
         {
-            score += 10 + pinsknocked[round + 2][0]; // Suma 10 más el primer lanzamiento de la siguiente ronda
-
+            if (round == NUM_ROUNDS - 2) //en el caso del round 8 (ronda 9) se iría fuera del array, asi que tengo que mirar el lanzamiento y no la ronda
+                score += 10 + pinsknocked[round + 1][1];
+            else
+                score += 10 + pinsknocked[round + 2][0]; // Suma 10 más el primer lanzamiento de la siguiente ronda
         }
         else //Si no hay doble pleno
             score += pinsknocked[round + 1][0] + pinsknocked[round + 1][1]; // Suma los dos lanzamientos de la siguiente ronda
@@ -110,7 +112,7 @@ while (round == NUM_ROUNDS - 1 || round == NUM_ROUNDS - 2)
         score += pinsknocked[round][0] + pinsknocked[round][1]; // Suma el primer y el segundo lanzamiento
     round++; // Incrementamos el contador de rondas
 
-    printf("Ronda 10 gay: %d puntos\n", score); // Ajuste: Imprime la puntuación después de calcularla
+    printf("Ronda 10: %d puntos\n", score); // Ajuste: Imprime la puntuación después de calcularla
 }
 printf("\nResultado total: %d puntos.\n", score);
 
