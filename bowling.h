@@ -3,9 +3,7 @@
 
 #define NUM_ROUNDS 10
 
-// Prototipo de la función para ingresar los datos de las rondas
 void input_rounds(int pinsknocked[NUM_ROUNDS][3]);
-// Prototipo de la función para calcular la puntuación
 int calculate_score(int pinsknocked[NUM_ROUNDS][3]);
 void all_strikes(int pinsknocked[NUM_ROUNDS][3]);
 void all_loses(int pinsknocked[NUM_ROUNDS][3]);

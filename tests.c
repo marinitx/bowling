@@ -1,68 +1,73 @@
 #include <stdio.h>
-#include "bowling.h" // Incluir el archivo de cabecera del programa principal
+#include "bowling.h"
 
+//TODO PLENOS
 void all_strikes(int pinsknocked[NUM_ROUNDS][3])
 {
     int i = 0;
 
-    // Llenar automáticamente los valores con plenos en cada lanzamiento usando un bucle while
-    while (i < NUM_ROUNDS - 1) {
-        pinsknocked[i][0] = 10; // Primer lanzamiento
-        pinsknocked[i][1] = 0;  // Segundo lanzamiento
-        pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
-        i++; // Incrementar el índice
+    while (i < NUM_ROUNDS - 1) 
+    {
+        pinsknocked[i][0] = 10;
+        pinsknocked[i][1] = 0;  
+        pinsknocked[i][2] = 0;
+        i++;
     }
     pinsknocked[NUM_ROUNDS - 1][0] = 10;
     pinsknocked[NUM_ROUNDS - 1][1] = 10;
     pinsknocked[NUM_ROUNDS - 1][2] = 10;
 }
 
+//TODO FALLOS O CEROS
 void all_loses(int pinsknocked[NUM_ROUNDS][3])
 {
     int i = 0;
 
-    // Llenar automáticamente los valores con plenos en cada lanzamiento usando un bucle while
-    while (i < NUM_ROUNDS) {
-        pinsknocked[i][0] = 0; // Primer lanzamiento
-        pinsknocked[i][1] = 0;  // Segundo lanzamiento
-        pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
-        i++; // Incrementar el índice
-    }
-}
-
-void always_one(int pinsknocked[NUM_ROUNDS][3])
-{
-    int i = 0;
-
-    // Llenar automáticamente los valores con plenos en cada lanzamiento usando un bucle while
-    while (i < NUM_ROUNDS) {
-        pinsknocked[i][0] = 1; // Primer lanzamiento
-        pinsknocked[i][1] = 1;  // Segundo lanzamiento
-        pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
-        i++; // Incrementar el índice
-    }
-}
-
-void ten_times_three(int pinsknocked[NUM_ROUNDS][3])
-{
-    int i = 0;
-
-    // Llenar automáticamente los valores con plenos en cada lanzamiento usando un bucle while
-    while (i < 5) {
-        pinsknocked[i][0] = 3; // Primer lanzamiento
-        pinsknocked[i][1] = 3;  // Segundo lanzamiento
-        pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
-        i++; // Incrementar el índice
-    }
-    while (i < NUM_ROUNDS)
+    while (i < NUM_ROUNDS) 
     {
-        pinsknocked[i][0] = 0; // Primer lanzamiento
-        pinsknocked[i][1] = 0;  // Segundo lanzamiento
-        pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
+        pinsknocked[i][0] = 0;
+        pinsknocked[i][1] = 0;
+        pinsknocked[i][2] = 0;
         i++;
     }
 }
 
+//SIEMPRE TIRA 1 BOLO
+void always_one(int pinsknocked[NUM_ROUNDS][3])
+{
+    int i = 0;
+
+    while (i < NUM_ROUNDS) 
+    {
+        pinsknocked[i][0] = 1;
+        pinsknocked[i][1] = 1;
+        pinsknocked[i][2] = 0;
+        i++;
+    }
+}
+
+// TIRA 3 BOLOS EN 10 LANZAMIENTOS Y 0 BOLOS EN OTROS 10 LANZAMIENTOS
+void ten_times_three(int pinsknocked[NUM_ROUNDS][3])
+{
+    int i = 0;
+
+    while (i < 5) 
+    {
+        pinsknocked[i][0] = 3;
+        pinsknocked[i][1] = 3;  
+        pinsknocked[i][2] = 0;
+        i++;
+    }
+    while (i < NUM_ROUNDS)
+    {
+        pinsknocked[i][0] = 0;
+        pinsknocked[i][1] = 0;  
+        pinsknocked[i][2] = 0;
+        i++;
+    }
+}
+
+//JUGADA ALEATORIA PREDEFINIDA
 void random_rolls(int pinsknocked[NUM_ROUNDS][3])
 {
     int i = 0;
