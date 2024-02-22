@@ -22,7 +22,7 @@ void all_loses(int pinsknocked[NUM_ROUNDS][3])
     int i = 0;
 
     // Llenar automáticamente los valores con plenos en cada lanzamiento usando un bucle while
-    while (i < NUM_ROUNDS - 1) {
+    while (i < NUM_ROUNDS) {
         pinsknocked[i][0] = 0; // Primer lanzamiento
         pinsknocked[i][1] = 0;  // Segundo lanzamiento
         pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
@@ -35,7 +35,7 @@ void always_one(int pinsknocked[NUM_ROUNDS][3])
     int i = 0;
 
     // Llenar automáticamente los valores con plenos en cada lanzamiento usando un bucle while
-    while (i < NUM_ROUNDS - 1) {
+    while (i < NUM_ROUNDS) {
         pinsknocked[i][0] = 1; // Primer lanzamiento
         pinsknocked[i][1] = 1;  // Segundo lanzamiento
         pinsknocked[i][2] = 0;  // Tercer lanzamiento (si es necesario)
