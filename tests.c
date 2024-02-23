@@ -102,3 +102,23 @@ void random_rolls(int pinsknocked[NUM_ROUNDS][3])
     pinsknocked[9][1] = 10;
     pinsknocked[9][2] = 8;
 }
+
+void last_spare(int pinsknocked[NUM_ROUNDS][3])
+{
+    int i = 0;
+
+    while (i < (NUM_ROUNDS - 1)) 
+    {
+        pinsknocked[i][0] = 0;
+        pinsknocked[i][1] = 0;  
+        pinsknocked[i][2] = 0;
+        i++;
+    }
+    while (i == (NUM_ROUNDS - 1))
+    {
+        pinsknocked[i][0] = 5;
+        pinsknocked[i][1] = 5;  
+        pinsknocked[i][2] = 1;
+        i++;
+    }
+}

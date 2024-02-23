@@ -32,41 +32,43 @@ void input_rounds(int pinsknocked[NUM_ROUNDS][3])
         }
         i++;
     }
-    
 
+    while (i == NUM_ROUNDS - 1)
+    {
     // Ronda 10
-    printf("Ronda %d, lanzamiento 1: ", NUM_ROUNDS);
-    while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][0]) != 1 || pinsknocked[NUM_ROUNDS - 1][0] < 0 || pinsknocked[NUM_ROUNDS - 1][0] > 10) //Error para números negativos o mayores a 10
-    {
-        printf("Por favor ingresa un número válido entre 0 y 10: ");
-        while(getchar() != '\n');
-    }
-
-    // PLENO en el primer lanzamiento de la ronda 10
-    if (pinsknocked[NUM_ROUNDS - 1][0] == 10) 
-    {
+        printf("Ronda %d, lanzamiento 1: ", NUM_ROUNDS);
+        while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][0]) != 1 || pinsknocked[NUM_ROUNDS - 1][0] < 0 || pinsknocked[NUM_ROUNDS - 1][0] > 10) //Error para números negativos o mayores a 10
+        {
+            printf("Por favor ingresa un número válido entre 0 y 10: ");
+            while(getchar() != '\n');
+        }
         printf("Ronda %d, lanzamiento 2: ", NUM_ROUNDS);
         while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][1]) != 1 || pinsknocked[NUM_ROUNDS - 1][1] < 0 || pinsknocked[NUM_ROUNDS - 1][1] > 10)
         {
             printf("Por favor ingresa un número válido entre 0 y 10: ");
             while(getchar() != '\n'); // Limpiar el buffer de entrada
         }
-        printf("Ronda %d, lanzamiento 3: ", NUM_ROUNDS);
-        while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][2]) != 1 || pinsknocked[NUM_ROUNDS - 1][2] < 0 || pinsknocked[NUM_ROUNDS - 1][2] > 10)
+
+        // PLENO o SEMIPLENO en la ronda 10
+        if ((pinsknocked[NUM_ROUNDS - 1][0] + pinsknocked[NUM_ROUNDS - 1][1]) == 10) 
         {
-            printf("Por favor ingresa un número válido entre 0 y 10: ");
-            while(getchar() != '\n'); // Limpiar el buffer de entrada
+            printf("Ronda %d, lanzamiento 3: ", NUM_ROUNDS);
+            while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][2]) != 1 || pinsknocked[NUM_ROUNDS - 1][2] < 0 || pinsknocked[NUM_ROUNDS - 1][2] > 10)
+            {
+                printf("Por favor ingresa un número válido entre 0 y 10: ");
+                while(getchar() != '\n'); // Limpiar el buffer de entrada
+            }
         }
-    }
-    else
-    { // No PLENO en el primer lanzamiento de la ronda 10
-        printf("Ronda %d, lanzamiento 2: ", NUM_ROUNDS);
-        while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][1]) != 1 || pinsknocked[NUM_ROUNDS - 1][1] < 0 || pinsknocked[NUM_ROUNDS - 1][1] > (10 - pinsknocked[NUM_ROUNDS - 1][0])) //Error negativos y mayores a los bolos restantes
-        {
-            printf("Por favor ingresa un número válido entre 0 y %d: ", 10 - pinsknocked[NUM_ROUNDS - 1][0]);
-            while(getchar() != '\n'); // Limpiar el buffer de entrada
+        else
+        { // No PLENO ni SEMIPLENO en la ronda 10
+            printf("Ronda %d, lanzamiento 2: ", NUM_ROUNDS);
+            while (scanf("%d", &pinsknocked[NUM_ROUNDS - 1][1]) != 1 || pinsknocked[NUM_ROUNDS - 1][1] < 0 || pinsknocked[NUM_ROUNDS - 1][1] > (10 - pinsknocked[NUM_ROUNDS - 1][0])) //Error negativos y mayores a los bolos restantes
+            {
+                printf("Por favor ingresa un número válido entre 0 y %d: ", 10 - pinsknocked[NUM_ROUNDS - 1][0]);
+                while(getchar() != '\n'); // Limpiar el buffer de entrada
+            }
         }
-        
+        i++;
     }
 }
 
@@ -143,8 +145,12 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
         // SEMIPLENO
         else if (pinsknocked[round][0] + pinsknocked[round][1] == 10) 
         {
-            score += 10 + pinsknocked[round][2];
             printscore(pinsknocked[round][0], pinsknocked[round][1], round);
+            if (pinsknocked[round][2] == 10)
+                printf(" %c |", 'X');
+            else
+                printf(" %d |", pinsknocked[round][2]);
+            score += 10 + pinsknocked[round][2];
         }
         // NI PLENO NI SEMIPLENO
         else
@@ -176,10 +182,10 @@ int main()
         }
     if (choice == 1) //si elige 1 elige tests predefinidos del archivo tests.c
     {
-        printf("\nIntroduce el número de test:\n\n1. Todo plenos\n2. Todo 0\n3. Todo 1\n4. Diez veces 3\n5. Jugada aleatoria\n");
-        while (scanf("%d", &testnum) != 1 || testnum < 1 || testnum > 5) 
+        printf("\nIntroduce el número de test:\n\n1. Todo plenos\n2. Todo 0\n3. Todo 1\n4. Diez veces 3\n5. Jugada aleatoria\n6. Semipleno al final\n");
+        while (scanf("%d", &testnum) != 1 || testnum < 1 || testnum > 6) 
         {
-            printf("Ingresa un número del 1 al 5");
+            printf("Ingresa un número del 1 al 6");
             while(getchar() != '\n');
         }
         if (testnum == 1) // todo plenos
@@ -192,6 +198,8 @@ int main()
             ten_times_three(pinsknocked);
         if (testnum == 5) // jugada aleatoria predefinida en tests.c
             random_rolls(pinsknocked);
+        if (testnum == 6)
+            last_spare(pinsknocked);
     }
     else
         input_rounds(pinsknocked); // dejarle al usuario poner los lanzamientos que quiera
