@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "bowling.h"
 
 #define NUM_ROUNDS 10
@@ -91,7 +89,6 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
     // para rondas de 0 a 8 (1 a 9)
     while (round < NUM_ROUNDS - 1)
     {
-        //printf("%c", '\n');
         // PLENO
         if (pinsknocked[round][0] == 10) 
         {
@@ -131,7 +128,7 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
         if (pinsknocked[round][0] == 10) 
         {
             printscore(pinsknocked[round][0], -1, round);
-            //Para imprimir específicamente las 3 tiradas no puedo llamar a printscore porque solo podía enviarle 2 tiradas
+            //Para imprimir específicamente las 3 tiradas no puedo llamar a printscore porque solo puedo enviarle 2 tiradas
             printf(" %c", 'X');
             if (pinsknocked[round][1] == 10)
                 printf(" %c", 'X');
@@ -199,6 +196,6 @@ int main()
     else
         input_rounds(pinsknocked); // dejarle al usuario poner los lanzamientos que quiera
     score = calculate_score(pinsknocked);
-    printf("\nResultado total: %d puntos.\n", score); // AÑADIR AQUÍ LA TABLA DE PUNTUACIONES
+    printf("\nResultado total: %d puntos.\n", score);
     return (0);
 }

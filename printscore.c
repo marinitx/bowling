@@ -1,5 +1,3 @@
-
-#include <stdio.h>
 #include "bowling.h"
 
 //Esta función imprime las rondas y las puntuaciones individuales

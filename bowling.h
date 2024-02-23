@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #ifndef BOWLING_H
 #define BOWLING_H
 
