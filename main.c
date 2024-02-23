@@ -96,6 +96,7 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
         if (pinsknocked[round][0] == 10) 
         {
             score += 10;
+            printscore(pinsknocked[round][0], -1, round); //El '-1' es para no confundir el pleno con el semipleno
             if (pinsknocked[round + 1][0] == 10) // Si hay otro pleno en la siguiente ronda
             {
                 if (round == NUM_ROUNDS - 2) //en el caso del round 8 (ronda 9) se iría fuera del array, asi que tengo que mirar el lanzamiento y no la ronda
@@ -108,15 +109,17 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
         }
         // SEMIPLENO
         else if (pinsknocked[round][0] + pinsknocked[round][1] == 10) 
+        {
             score += 10 + pinsknocked[round + 1][0]; // Suma el primer lanzamiento de la siguiente ronda
+            printscore(pinsknocked[round][0], pinsknocked[round][1], round); // Imprimo las puntuaciones individuales de los lanzamientos
+        }
         // NI PLENO NI SEMIPLENO
         else
+        {
             score += pinsknocked[round][0] + pinsknocked[round][1]; // Suma el primer y el segundo lanzamiento
+            printscore(pinsknocked[round][0], pinsknocked[round][1], round); // Imprimo las puntuaciones individuales de los lanzamientos
+        }
         //Ahora hay que imprimir las puntuaciones individuales
-        if (pinsknocked[round][0] == 10)
-            printscore(pinsknocked[round][0], -1, round); //El '-1' es para no confundir el pleno con el semipleno
-        else
-            printscore(pinsknocked[round][0], pinsknocked[round][1], round);
         round++;
         printf("  %d  |\n", score);
     }
@@ -126,17 +129,32 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
     {
         // PLENO
         if (pinsknocked[round][0] == 10) 
+        {
+            printscore(pinsknocked[round][0], -1, round);
+            //Para imprimir específicamente las 3 tiradas no puedo llamar a printscore porque solo podía enviarle 2 tiradas
+            printf(" %c", 'X');
+            if (pinsknocked[round][1] == 10)
+                printf(" %c", 'X');
+            else
+                printf(" %d", pinsknocked[round][1]);
+            if (pinsknocked[round][2] == 10)
+                printf(" %c |", 'X');
+            else
+                printf(" %d |", pinsknocked[round][2]);
             score += 10 + pinsknocked[round][1] + pinsknocked[round][2];
+        }
         // SEMIPLENO
         else if (pinsknocked[round][0] + pinsknocked[round][1] == 10) 
+        {
             score += 10 + pinsknocked[round][2];
+            printscore(pinsknocked[round][0], pinsknocked[round][1], round);
+        }
         // NI PLENO NI SEMIPLENO
         else
+        {
             score += pinsknocked[round][0] + pinsknocked[round][1]; // Suma el primer y el segundo lanzamiento
-        if (pinsknocked[round][0] == 10)
-            printscore(pinsknocked[round][0], -1, round);
-        else
             printscore(pinsknocked[round][0], pinsknocked[round][1], round);
+        }
         round++;
         printf("  %d  |\n", score);
         //printf("Ronda 10: %d puntos\n", score);
