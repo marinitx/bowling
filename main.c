@@ -77,10 +77,21 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
 {
     int score = 0;
     int round = 0;
+    int i;
 
+    i = 0;
+    printf("\nTabla de Puntuaciones:\n");
+    while (i < NUM_ROUNDS) //para pintar el separador
+    {
+        printf("%s", "--");
+        i++;
+    }
+    printf("\n Round  Score  Total\n");
+    i = 0;
     // para rondas de 0 a 8 (1 a 9)
     while (round < NUM_ROUNDS - 1)
     {
+        //printf("%c", '\n');
         // PLENO
         if (pinsknocked[round][0] == 10) 
         {
@@ -101,8 +112,13 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
         // NI PLENO NI SEMIPLENO
         else
             score += pinsknocked[round][0] + pinsknocked[round][1]; // Suma el primer y el segundo lanzamiento
+        //Ahora hay que imprimir las puntuaciones individuales
+        if (pinsknocked[round][0] == 10)
+            printscore(pinsknocked[round][0], -1, round); //El '-1' es para no confundir el pleno con el semipleno
+        else
+            printscore(pinsknocked[round][0], pinsknocked[round][1], round);
         round++;
-        printf("Ronda %d: %d puntos\n", round, score);
+        printf("  %d  |\n", score);
     }
 
     //ROUND 9 and 8 = RONDA 10 y 9
@@ -117,9 +133,15 @@ int calculate_score(int pinsknocked[NUM_ROUNDS][3])
         // NI PLENO NI SEMIPLENO
         else
             score += pinsknocked[round][0] + pinsknocked[round][1]; // Suma el primer y el segundo lanzamiento
+        if (pinsknocked[round][0] == 10)
+            printscore(pinsknocked[round][0], -1, round);
+        else
+            printscore(pinsknocked[round][0], pinsknocked[round][1], round);
         round++;
-        printf("Ronda 10: %d puntos\n", score);
+        printf("  %d  |\n", score);
+        //printf("Ronda 10: %d puntos\n", score);
     }
+    printf("\n");
     return (score);
 }
 
@@ -129,8 +151,9 @@ int main()
     int score;
     int choice;
     int testnum;
+    int finalscore[NUM_ROUNDS];
 
-    printf("¿Prefieres utilizar tests predefinidos (1) o elegir tus propias tiradas (2)?\n ");
+    printf("\n¿Prefieres utilizar tests predefinidos (1) o elegir tus propias tiradas (2)?\n ");
     while (scanf("%d", &choice) != 1 || choice != 1 && choice != 2) //Dos opciones o 1 o 2
         {
             printf("Elección no válida, ingresa '1' o '2': ");
@@ -138,7 +161,7 @@ int main()
         }
     if (choice == 1) //si elige 1 elige tests predefinidos del archivo tests.c
     {
-        printf("Introduce el número de test: \n1. Todo plenos\n2.Todo 0\n3.Todo 1\n4.Diez veces 3\n5.Jugada aleatoria\n");
+        printf("\nIntroduce el número de test:\n\n1. Todo plenos\n2. Todo 0\n3. Todo 1\n4. Diez veces 3\n5. Jugada aleatoria\n");
         while (scanf("%d", &testnum) != 1 || testnum < 1 || testnum > 5) 
         {
             printf("Ingresa un número del 1 al 5");
