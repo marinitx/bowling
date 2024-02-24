@@ -1,5 +1,5 @@
 <h1>Bowling Game</h1>
-<p>Simulación de una bolera hecha en C.</p>
+<p>Simulación de una bolera hecha en C para el reto de Izertis.</p>
 <h2>Para ejecutar el programa:</h2>
 <ol>
 <li>Introduce en la terminal "make" para compilar. Aparecerá una animación para comenzar.</li>
